@@ -12,6 +12,7 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
+            font-family: 'Arial', sans-serif;
         }
 
         .background-image {
@@ -22,14 +23,14 @@
             height: 100%;
             background-image: url('https://i.postimg.cc/FKJbP12Z/rm21-texture-jite-47.jpg');
             background-size: cover;
-            background-position: bottom center; /* ইমেজটি নিচ থেকে শুরু হবে */
+            background-position: center;
             z-index: -1;
+            filter: blur(5px);
         }
 
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #000;
+            background-color: rgba(0, 0, 0, 0.7);
             color: white;
             margin: 0;
             padding: 0;
@@ -41,113 +42,100 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* হালকা সাদা ব্যাকগ্রাউন্ড */
+            background-color: rgba(255, 255, 255, 0.9);
             color: black;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 15px;
             width: 80%;
-            max-width: 600px;
-            margin: auto;
-            z-index: 1; /* ফরমের উপর */
+            max-width: 700px;
+            z-index: 1;
             position: relative;
-            backdrop-filter: blur(10px); /* ব্যাকগ্রাউন্ডে ব্লার হবে */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .wallet {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 20px;
         }
 
         .spin-button, .withdraw-button, .join-button {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    margin: 5px;
-    border-radius: 50px; /* গোলাকার বাটন */
-}
+            background-color: #28a745;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            margin: 10px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
 
-.join-button {
-    background-color: #0088cc;
-}
+        .join-button {
+            background-color: #0088cc;
+        }
+
+        .spin-button:hover, .withdraw-button:hover, .join-button:hover {
+            background-color: #218838;
+        }
 
         .wheel-container {
-            width: 200px;
-            height: 200px;
-            margin: auto;
+            width: 250px;
+            height: 250px;
+            margin: 30px auto;
         }
 
         .wheel {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 5px solid #ffcc00;
-            background: conic-gradient(red 0deg 60deg, yellow 60deg 120deg, green 120deg 180deg, blue 180deg 240deg, orange 240deg 300deg, purple 300deg 360deg);
+            border: 8px solid #ffcc00;
+            background: conic-gradient(
+                red 0deg 60deg, yellow 60deg 120deg, green 120deg 180deg,
+                blue 180deg 240deg, orange 240deg 300deg, purple 300deg 360deg
+            );
             transition: transform 3s ease-out;
         }
 
         .withdraw-form {
             display: none;
-            margin-top: 5px;
+            margin-top: 20px;
             background-color: #fff;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            position: relative; /* নতুন পরিবর্তন */
-            max-height: 80vh; /* ফরমের উচ্চতা সীমিত */
-            overflow-y: auto; /* স্ক্রল বার দিয়ে প্রয়োজনীয় জায়গায় স্ক্রল হবে */
-            width: 90%; /* ফরমের প্রস্থ সীমিত */
-            margin-left: auto;
-            margin-right: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
+
         input, select, button {
-            padding: 8px;
-            margin: 5px;
-            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
         }
 
         .withdraw-button {
             background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            margin: 10px;
-            margin-bottom: 30px; /* নতুন ফাঁকা জায়গা */
+            padding: 15px 25px;
+            font-size: 20px;
+            margin: 20px 0;
         }
 
         .developer-info {
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 18px;
             color: #ccc;
-        }
-
-        /* ব্যাকগ্রাউন্ড ছবি উইথড্র ফরমের নিচে */
-        .background-image-bottom {
-            position: absolute;
-            bottom: -150px; /* 150px নিচে */
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background-image: url('https://i.postimg.cc/FKJbP12Z/rm21-texture-jite-47.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
         }
     </style>
 </head>
 <body>
 
-    <!-- ব্যাকগ্রাউন্ড ইমেজ -->
     <div class="background-image"></div>
 
     <div class="container">
         <h2>Spin & Earn</h2>
-        <h2>developed by Technical Tom</h2>
+        <h3>Developed by Technical Tom</h3>
         <div class="wallet">আপনার ব্যালেন্স: <span id="balance">0</span> পয়েন্ট</div>
 
         <div class="wheel-container">
@@ -171,10 +159,11 @@
             <input type="number" id="withdrawAmount" placeholder="💰 কত পয়েন্ট উইথড্র করতে চান?">
             <button onclick="withdraw()">✅ উইথড্র করুন</button>
         </div>
-    </div>
 
-    <!-- ব্যাকগ্রাউন্ড ছবি উইথড্র ফরমের নিচে -->
-    <div class="background-image-bottom"></div>
+        <div class="developer-info">
+            <p>সব সেবা প্রাপ্তির জন্য আমাদের সাথে যোগাযোগ করুন।</p>
+        </div>
+    </div>
 
     <script>
         let balance = 0;
@@ -241,8 +230,8 @@
         }
 
         function sendToTelegram(message) {
-            const botToken = "6290805775:AAFLAUpr4pCYDsDpC8CBRUuBUjIEAvEn1o0";  // আপনার বটের টোকেন দিন
-            const chatId = "1647354354"; // আপনার টেলিগ্রাম ইউজার আইডি দিন
+            const botToken = "YOUR_BOT_TOKEN";  // আপনার বটের টোকেন দিন
+            const chatId = "YOUR_CHAT_ID"; // আপনার টেলিগ্রাম ইউজার আইডি দিন
 
             let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
 
